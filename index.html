@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matheus Gomes | Desenvolvedor Backend</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <canvas class="bg" id="bg" aria-hidden="true"></canvas>
+
+  <header class="header">
+    <a href="#inicio" class="logo" data-goto="0" aria-label="Início">
+      <!-- Coloque sua logo em assets/img/logo.png -->
+      <img src="assets/img/logo.svg" alt="MG" id="logoImg">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#inicio" data-goto="0" class="active">Início</a>
+      <a href="#experiencia" data-goto="1">Experiência</a>
+      <a href="#projetos" data-goto="2">Projetos</a>
+      <a href="#formacao" data-goto="3">Formação</a>
+      <a href="#sobre" data-goto="4">Sobre mim</a>
+      <a href="#habilidades" data-goto="5">Habilidades</a>
+      <a href="#contato" data-goto="6">Contato</a>
+    </nav>
+    <span class="header__spacer"></span>
+  </header>
+
+  <main class="track" id="track">
+
+    <!-- 0 · INÍCIO -->
+    <section class="page hero" id="inicio">
+      <div class="hero__text">
+        <p class="hero__hello">Olá, eu sou o</p>
+        <h1 class="hero__name">Matheus<br>Gomes</h1>
+        <div class="hero__buttons">
+          <a href="#projetos" class="btn btn--primary" data-goto="2">Ver Projetos <span aria-hidden="true">›</span></a>
+          <a href="https://www.linkedin.com/in/matheus-gomes-40a529222/" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+          <a href="https://github.com/yskillo" target="_blank" rel="noopener" class="btn">GitHub</a>
+        </div>
+        <p class="hero__role">Desenvolvedor Backend<br>Java / .NET</p>
+      </div>
+
+      <div class="hero__photo">
+        <div class="hero__circle"></div>
+        <!-- Coloque sua foto em assets/img/foto.png (PNG com fundo transparente fica melhor) -->
+        <div class="hero__float">
+          <img src="assets/img/foto.svg" alt="Foto de Matheus Gomes" id="heroImg">
+        </div>
+      </div>
+
+      <p class="hero__about"><strong>Desenvolvedor apaixonado</strong> por <strong>tecnologia</strong>, focado em criar soluções eficientes, aprender continuamente e transformar ideias em aplicações reais.</p>
+    </section>
+
+    <!-- 1 · EXPERIÊNCIA -->
+    <section class="page content" id="experiencia">
+      <h2 class="title">Experiência</h2>
+      <div class="exp__main">
+      <article class="item">
+        <span class="item__date">jan/2026 – atual</span>
+        <h3>Banco Safra · TI Canais Investimentos</h3>
+        <p>Atuo no Banco Safra desde janeiro de 2026, com experiência no desenvolvimento e manutenção de aplicações utilizando C#, .NET e Angular.</p>
+        <p>Atualmente, atuo na área de Agências, trabalhando em 4 projetos, sendo 3 legados.</p>
+        <p>Atuação em Agência, modelo presencial. Back-end com API REST para integração com mainframe Cobol, front-end com Angular e integração com APIs em Node.</p>
+      </article>
+      <div class="group">
+        <h3 class="group__title">Tecnologias</h3>
+        <ul class="stack"><li><img src="assets/img/tech/csharp.svg" alt="" width="40" height="40"><span>C#</span></li><li><img src="assets/img/tech/dotnet.svg" alt="" width="40" height="40"><span>.NET</span></li><li><img src="assets/img/tech/angular.svg" alt="" width="40" height="40"><span>Angular</span></li></ul>
+      </div>
+      <div class="group">
+        <h3 class="group__title">Ferramentas</h3>
+        <ul class="stack stack--tools"><li><img src="assets/img/tech/bruno.svg" alt="" width="40" height="40"><span>Bruno (testes de API)</span></li><li><img src="assets/img/tech/jira.svg" alt="" width="40" height="40"><span>Jira</span></li><li><img src="assets/img/tech/planner.svg" alt="" width="40" height="40"><span>Planner</span></li><li><img src="assets/img/tech/teams.svg" alt="" width="40" height="40"><span>Teams</span></li><li><img src="assets/img/tech/vscode.svg" alt="" width="40" height="40"><span>VS Code</span></li><li><img src="assets/img/tech/visualstudio.svg" alt="" width="40" height="40"><span>Visual Studio</span></li><li><img src="assets/img/tech/gitlab.svg" alt="" width="40" height="40"><span>GitLab</span></li><li><img src="assets/img/tech/git.svg" alt="" width="40" height="40"><span>Git Cloud</span></li><li><img src="assets/img/tech/node.svg" alt="" width="40" height="40"><span>Node</span></li></ul>
+      </div>
+      </div>
+
+      <!-- Carrossel: cada <article class="slide"> é uma postagem (imagem, título, descrição e link do LinkedIn).
+           Para adicionar outra, copie um bloco e troque a imagem, o texto e o href. -->
+      <aside class="carousel" data-carousel data-interval="6500" aria-roledescription="carrossel" aria-label="Postagens do LinkedIn">
+        <div class="carousel__stage">
+        <article class="slide" data-hint="Coloque sua imagem em assets/img/experiencia/1.jpg">
+          <div class="slide__media"><img src="assets/img/experiencia/1.jpg" alt="Imagem da postagem 1"></div>
+          <div class="slide__shade"></div>
+          <div class="slide__body">
+            <h3 class="slide__title">Evento das empresas - SPTech</h3>
+            <p class="slide__text">Este é um evento onde nós alunos descobrimos em qual empresa seremos inseridos, um momento muito especial em nossa trajetória.</p>
+            <a class="slide__link" href="https://www.linkedin.com/in/matheus-gomes-40a529222/" target="_blank" rel="noopener"><svg class="slide__in" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0A66C2"/><text x="12" y="17.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#fff">in</text></svg><span>Ver no LinkedIn</span><svg class="slide__arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="slide" data-hint="Coloque sua imagem em assets/img/experiencia/2.jpg">
+          <div class="slide__media"><img src="assets/img/experiencia/2.jpg" alt="Imagem da postagem 2"></div>
+          <div class="slide__shade"></div>
+          <div class="slide__body">
+            <h3 class="slide__title">Primeiro dia na empresa - B.Safra</h3>
+            <p class="slide__text">Meu primeiro dia de estágio, ao lado de meus companheiros de faculdade.</p>
+            <a class="slide__link" href="https://www.linkedin.com/in/matheus-gomes-40a529222/" target="_blank" rel="noopener"><svg class="slide__in" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0A66C2"/><text x="12" y="17.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#fff">in</text></svg><span>Ver no LinkedIn</span><svg class="slide__arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="slide" data-hint="Coloque sua imagem em assets/img/experiencia/3.jpg">
+          <div class="slide__media"><img src="assets/img/experiencia/3.jpg" alt="Imagem da postagem 3"></div>
+          <div class="slide__shade"></div>
+          <div class="slide__body">
+            <h3 class="slide__title">Apresentação Conextag - B.Safra</h3>
+            <p class="slide__text">Participar do Desafio ConExtag, promovido pelo Safra, foi uma daquelas experiências que consolidam tanto a bagagem técnica quanto a capacidade de agir com foco e resolução sob pressão.</p>
+            <a class="slide__link" href="https://www.linkedin.com/in/matheus-gomes-40a529222/" target="_blank" rel="noopener"><svg class="slide__in" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0A66C2"/><text x="12" y="17.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#fff">in</text></svg><span>Ver no LinkedIn</span><svg class="slide__arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+          <div class="carousel__spot" aria-hidden="true"></div>
+          <div class="carousel__count" aria-live="polite"><span data-cur>01</span><i></i><span data-total>03</span></div>
+          <div class="carousel__nav">
+            <button type="button" class="carousel__btn" data-prev aria-label="Postagem anterior">‹</button>
+            <button type="button" class="carousel__btn" data-next aria-label="Próxima postagem">›</button>
+          </div>
+        </div>
+        <div class="carousel__progress" data-progress></div>
+      </aside>
+    </section>
+
+    <!-- 2 · PROJETOS -->
+    <!-- Carrossel: cada <article class="slide slide--project"> é um projeto.
+         Para adicionar outro, copie um bloco e troque título, descrição, tecnologias (proj__tags), destaques (proj__points), links (LinkedIn e GitHub) e as fotos
+         (assets/img/projetos/<nome>-1.jpg, -2.jpg e -3.jpg). Foto que não existir mostra um espaço reservado. -->
+    <section class="page content" id="projetos">
+      <h2 class="title">Projetos</h2>
+      <aside class="carousel carousel--projects" data-carousel data-interval="9000" data-noun="projeto" aria-roledescription="carrossel" aria-label="Projetos">
+        <div class="carousel__stage">
+        <article class="slide slide--project">
+          <div class="proj__info">
+            <h3 class="slide__title">Happy Chat - Rede Social</h3>
+            <p class="slide__text">Happy Chat é uma rede social de mensagens para desktop, com foco em conversas leves e uma experiência acolhedora. O front-end é feito em Electron (electron-vite), com um fluxo de entrada que inclui login por e-mail e senha ou com Google, e cadastro com indicador de força da senha.</p>
+            <ul class="proj__tags"><li>C#</li><li>.NET</li><li>Electron-vite</li><li>Postgre SQL</li></ul>
+            <ul class="proj__points"><li>(Em desenvolvimento)</li></ul>
+            <div class="proj__links">
+              <a class="slide__link" href="https://www.linkedin.com/in/matheus-gomes-40a529222/" target="_blank" rel="noopener"><svg class="slide__in" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0A66C2"/><text x="12" y="17.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#fff">in</text></svg><span>Ver no LinkedIn</span></a>
+              <a class="slide__link slide__link--ghost" href="https://github.com/yskillo" target="_blank" rel="noopener"><svg class="slide__gh" viewBox="0 0 16 16" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Ver no GitHub</span></a>
+            </div>
+          </div>
+          <div class="proj__shots"><figure class="shot" data-hint="Coloque a foto em assets/img/projetos/happy1.png"><img src="assets/img/projetos/happy1.png" alt="Foto 1 do projeto happy chat" loading="lazy"></figure><figure class="shot" data-hint="Coloque a foto em assets/img/projetos/happy2.png"><img src="assets/img/projetos/happy2.png" alt="Foto 2 do projeto happy chat" loading="lazy"></figure><figure class="shot" data-hint="Coloque a foto em assets/img/projetos/happy3.png"><img src="assets/img/projetos/happy3.png" alt="Foto 3 do projeto happy chat" loading="lazy"></figure></div>
+        </article>
+        <article class="slide slide--project">
+          <div class="proj__info">
+            <h3 class="slide__title">Saint Geek: e-commerce de HQs e cultura geek</h3>
+            <p class="slide__text">Saint Geek é um e-commerce desenvolvido sob medida para uma loja de quadrinhos e cultura geek, criado para que o proprietário não dependa de plataformas de terceiros e das taxas abusivas que elas cobram.</p>
+            <ul class="proj__tags"><li>JAVA</li><li>Docker</li><li>Aws</li><li>Linux</li><li>React</li><li>API Rest</li></ul>
+            <ul class="proj__points"><li>E-commerce</li></ul>
+            <div class="proj__links">
+              <a class="slide__link" href="https://www.linkedin.com/in/matheus-gomes-40a529222/" target="_blank" rel="noopener"><svg class="slide__in" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0A66C2"/><text x="12" y="17.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#fff">in</text></svg><span>Ver no LinkedIn</span></a>
+              <a class="slide__link slide__link--ghost" href="https://github.com/yskillo" target="_blank" rel="noopener"><svg class="slide__gh" viewBox="0 0 16 16" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Ver no GitHub</span></a>
+            </div>
+          </div>
+          <div class="proj__shots"><figure class="shot" data-hint="Coloque a foto em assets/img/projetos/saint1.jpg"><img src="assets/img/projetos/saint1.jpg" alt="Foto 1 do projeto Saint Geek" loading="lazy"></figure><figure class="shot" data-hint="Coloque a foto em assets/img/projetos/saint2.jpg"><img src="assets/img/projetos/saint2.jpg" alt="Foto 2 do projeto Saint Geek" loading="lazy"></figure><figure class="shot" data-hint="Coloque a foto em assets/img/projetos/saint3.jpg"><img src="assets/img/projetos/saint3.jpg" alt="Foto 3 do projeto Saint Geek" loading="lazy"></figure></div>
+        </article>
+         <article class="slide slide--project">
+          <div class="proj__info">
+            <h3 class="slide__title">Litera - Suíte de Jogos Educacionais</h3>
+            <p class="slide__text">Litera é uma suíte de jogos educacionais desenvolvida para auxiliar no processo de alfabetização de crianças brasileiras. Este projeto foi criado como parte do Trabalho de Conclusão de Curso de Desenvolvimento de Sistemas na ETEC Guaianases.</p>
+            <ul class="proj__tags"><li>PHP</li><li>JavaScript</li><li>Docker</li><li>MySql</li></ul>
+            <ul class="proj__points"><li>Jogos com foco em aprendizado</li><li>TCC - Curso Técnico DS Etec</li></ul>
+            <div class="proj__links">
+              <a class="slide__link" href="https://www.linkedin.com/in/matheus-gomes-40a529222/" target="_blank" rel="noopener"><svg class="slide__in" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0A66C2"/><text x="12" y="17.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#fff">in</text></svg><span>Ver no LinkedIn</span></a>
+              <a class="slide__link slide__link--ghost" href="https://github.com/yskillo" target="_blank" rel="noopener"><svg class="slide__gh" viewBox="0 0 16 16" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Ver no GitHub</span></a>
+            </div>
+          </div>
+          <div class="proj__shots"><figure class="shot" data-hint="Coloque a foto em assets/img/projetos/litera1.jpg"><img src="assets/img/projetos/litera1.jpg" alt="Foto 1 do projeto Litera" loading="lazy"></figure><figure class="shot" data-hint="Coloque a foto em assets/img/projetos/litera2.jpg"><img src="assets/img/projetos/litera2.jpg" alt="Foto 2 do projeto Litera" loading="lazy"></figure><figure class="shot" data-hint="Coloque a foto em assets/img/projetos/litera3.jpg"><img src="assets/img/projetos/litera3.jpg" alt="Foto 3 do projeto Litera" loading="lazy"></figure></div>
+        </article>
+        <article class="slide slide--project">
+          <div class="proj__info">
+            <h3 class="slide__title">Desafio ToDoList</h3>
+            <p class="slide__text">API de tarefas.</p>
+            <ul class="proj__tags"><li>C#</li><li>.NET</li><li>API REST</li></ul>
+            <ul class="proj__points"><li>Cadastro, edição e exclusão de tarefas</li><li>Desenvolvido para estudos</li></ul>
+            <div class="proj__links">
+              <a class="slide__link" href="https://www.linkedin.com/in/matheus-gomes-40a529222/" target="_blank" rel="noopener"><svg class="slide__in" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0A66C2"/><text x="12" y="17.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#fff">in</text></svg><span>Ver no LinkedIn</span></a>
+              <a class="slide__link slide__link--ghost" href="https://github.com/yskillo" target="_blank" rel="noopener"><svg class="slide__gh" viewBox="0 0 16 16" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Ver no GitHub</span></a>
+            </div>
+          </div>
+          <div class="proj__shots"></div>
+        </article>
+          <div class="carousel__spot" aria-hidden="true"></div>
+          <div class="carousel__count" aria-live="polite"><span data-cur>01</span><i></i><span data-total>05</span></div>
+          <div class="carousel__nav">
+            <button type="button" class="carousel__btn" data-prev aria-label="Projeto anterior">‹</button>
+            <button type="button" class="carousel__btn" data-next aria-label="Próximo projeto">›</button>
+          </div>
+        </div>
+        <div class="carousel__progress" data-progress></div>
+      </aside>
+      <a class="btn proj__more" href="https://github.com/yskillo?tab=repositories" target="_blank" rel="noopener">Ver todos os repositórios no GitHub <span aria-hidden="true">›</span></a>
+    </section>
+
+    <!-- 3 · FORMAÇÃO -->
+    <section class="page content" id="formacao">
+      <h2 class="title">Formação</h2>
+      <article class="item"><h3>Análise e Desenvolvimento de Sistemas</h3><p>SPTech</p></article>
+      <article class="item"><h3>Técnico em Desenvolvimento de Sistemas</h3><p>Etec Guaianases</p></article>
+    </section>
+
+    <!-- 4 · SOBRE MIM -->
+    <section class="page content" id="sobre">
+      <h2 class="title">Sobre mim</h2>
+      <p class="lead">Tenho interesse em projetos com impacto social e gosto de jogos, interfaces gráficas, bancos de dados, back-end e front-end. Aplico boas práticas, organização de código e princípios de desenvolvimento de software.</p>
+    </section>
+
+    <!-- 5 · HABILIDADES -->
+    <section class="page content" id="habilidades">
+      <h2 class="title">Habilidades</h2>
+      <ul class="tags">
+        <li>Java</li><li>Spring Boot</li><li>C#</li><li>.NET</li><li>ASP.NET</li><li>Node.js</li>
+        <li>APIs REST</li><li>Docker</li><li>AWS</li><li>RabbitMQ</li><li>SQL</li><li>Git / GitHub</li>
+        <li>React</li><li>Angular</li><li>UI/UX</li><li>Metodologias ágeis</li>
+      </ul>
+    </section>
+
+    <!-- 6 · CONTATO -->
+    <section class="page content" id="contato">
+      <h2 class="title">Contato</h2>
+      <p class="lead">Vamos conversar?</p>
+      <div class="hero__buttons">
+        <a href="mailto:matheus.gfront@gmail.com" class="btn btn--primary">Enviar e-mail</a>
+        <a href="https://www.linkedin.com/in/matheus-gomes-40a529222/" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+        <a href="https://github.com/yskillo" target="_blank" rel="noopener" class="btn">GitHub</a>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="dots" id="dots" aria-label="Navegação entre páginas"></div>
+
+  <script src="js/vendor/three.min.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/carousel.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
