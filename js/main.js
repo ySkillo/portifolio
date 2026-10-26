@@ -1,94 +1,158 @@
+/* Site em rolagem vertical com animações de scroll.
+   - barra de progresso, menu e bolinhas acompanham a seção atual
+   - itens aparecem (fade + deslize) quando entram na tela, em sequência
+   - hero: texto e foto se afastam enquanto você rola
+   - Experiência: imagens com parallax
+   - Projetos: cartões se empilham e o anterior encolhe/escurece quando o próximo chega
+   O fundo 3D (background.js) também reage à rolagem. */
 (() => {
-  const track = document.getElementById('track');
   const pages = [...document.querySelectorAll('.page')];
   const navLinks = [...document.querySelectorAll('.nav a')];
   const dotsBox = document.getElementById('dots');
+  const header = document.getElementById('header');
+  const progress = document.getElementById('progress');
+  const hero = document.getElementById('inicio');
   const heroImg = document.getElementById('heroImg');
+  const logoImg = document.getElementById('logoImg');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const LOCK_MS = 900;   // igual ao --speed do CSS
-  const WHEEL_MIN = 20;  // sensibilidade do scroll
-  const SWIPE_MIN = 50;  // sensibilidade do toque
+  /* ---------- Imagens que faltam: mostra o espaço reservado ---------- */
+  const markMissing = (img, el, cls = 'is-missing') => {
+    img.addEventListener('error', () => el.classList.add(cls));
+    if (img.complete && !img.naturalWidth) el.classList.add(cls);
+  };
+  markMissing(logoImg, logoImg);
+  markMissing(heroImg, heroImg);
+  document.querySelectorAll('.post').forEach((post) => { const i = post.querySelector('img'); if (i) markMissing(i, post); });
+  document.querySelectorAll('.shot').forEach((shot) => { const i = shot.querySelector('img'); if (i) markMissing(i, shot); });
 
-  let current = -1;
-  let locked = false;
-
-  track.style.setProperty('--pages', pages.length);
+  /* ---------- Navegação ---------- */
+  const goTo = (i) => pages[i] && pages[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
 
   const dots = pages.map((_, i) => {
     const b = document.createElement('button');
-    b.setAttribute('aria-label', `Ir para página ${i + 1}`);
+    b.type = 'button';
+    b.setAttribute('aria-label', `Ir para seção ${i + 1}`);
     b.addEventListener('click', () => goTo(i));
     dotsBox.appendChild(b);
     return b;
   });
 
-  // Sem imagem → mostra espaço reservado
-  const logoImg = document.getElementById('logoImg');
-  logoImg.addEventListener('error', () => logoImg.classList.add('is-missing'));
-  heroImg.addEventListener('error', () => heroImg.classList.add('is-missing'));
-  if (heroImg.complete && !heroImg.naturalWidth) heroImg.classList.add('is-missing');
-
-  function goTo(index) {
-    index = Math.max(0, Math.min(pages.length - 1, index));
-    if (index === current) return;
-    current = index;
-    track.style.transform = `translateX(-${current * 100}vw)`;
-    pages.forEach((p, i) => p.classList.toggle('is-active', i === current));
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-    navLinks.forEach((a, i) => a.classList.toggle('active', i === current));
-    history.replaceState(null, '', '#' + pages[current].id);
-    window.dispatchEvent(new CustomEvent('pagechange', { detail: { index: current, total: pages.length } }));
-    locked = true;
-    setTimeout(() => (locked = false), LOCK_MS);
-  }
-  const next = () => goTo(current + 1);
-  const prev = () => goTo(current - 1);
-
-  // Página com rolagem interna (telas pequenas): rola antes de trocar
-  function canScrollInside(dir) {
-    const el = pages[current];
-    const oy = getComputedStyle(el).overflowY;
-    if (oy !== 'auto' && oy !== 'scroll') return false; // página sem rolagem interna
-    if (el.scrollHeight <= el.clientHeight + 2) return false;
-    return dir > 0 ? el.scrollTop + el.clientHeight < el.scrollHeight - 2 : el.scrollTop > 2;
-  }
-
-  window.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaY) < WHEEL_MIN && Math.abs(e.deltaX) < WHEEL_MIN) return;
-    const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-    const dir = delta > 0 ? 1 : -1;
-    if (canScrollInside(dir)) return;
-    e.preventDefault();
-    if (!locked) dir > 0 ? next() : prev();
-  }, { passive: false });
-
-  window.addEventListener('keydown', (e) => {
-    if (locked) return;
-    if (['ArrowDown', 'ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); next(); }
-    if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
-    if (e.key === 'Home') goTo(0);
-    if (e.key === 'End') goTo(pages.length - 1);
-  });
-
-  let startY = 0, startX = 0;
-  window.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; startX = e.touches[0].clientX; }, { passive: true });
-  window.addEventListener('touchend', (e) => {
-    const dy = startY - e.changedTouches[0].clientY;
-    const dx = startX - e.changedTouches[0].clientX;
-    const d = Math.abs(dy) > Math.abs(dx) ? dy : dx;
-    if (Math.abs(d) < SWIPE_MIN || locked) return;
-    const dir = d > 0 ? 1 : -1;
-    if (canScrollInside(dir)) return;
-    dir > 0 ? next() : prev();
-  }, { passive: true });
-
   document.querySelectorAll('[data-goto]').forEach((el) =>
     el.addEventListener('click', (e) => { e.preventDefault(); goTo(Number(el.dataset.goto)); })
   );
 
-  // Abre direto na seção do hash (ex.: #projetos), sem animação
-  const start = pages.findIndex((p) => '#' + p.id === location.hash);
-  track.style.transition = 'none';
-  goTo(start >= 0 ? start : 0);
-  requestAnimationFrame(() => requestAnimationFrame(() => (track.style.transition = '')));
+  let current = -1;
+  function setActive(i) {
+    if (i === current) return;
+    current = i;
+    dots.forEach((d, k) => d.classList.toggle('active', k === i));
+    navLinks.forEach((a, k) => a.classList.toggle('active', k === i));
+    history.replaceState(null, '', '#' + pages[i].id);
+  }
+
+  /* ---------- Aparecer ao rolar ---------- */
+  const endReveal = (el) => {          // terminou a entrada: tira as classes para não atrapalhar hover/transições do elemento
+    el.addEventListener('transitionend', (e) => {
+      if (e.target !== el || e.propertyName !== 'opacity') return;
+      [...el.classList].filter((c) => c.startsWith('reveal')).forEach((c) => el.classList.remove(c));
+      el.style.removeProperty('--d');
+    }, { once: false });
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+
+  function tag(sel, { variant = '', base = 0, step = 90 } = {}) {
+    document.querySelectorAll(sel).forEach((el) => {
+      const idx = [...el.parentElement.children].filter((c) => c.matches(sel)).indexOf(el);
+      el.classList.add('reveal');
+      if (variant) el.classList.add('reveal--' + variant);
+      el.style.setProperty('--d', (base + idx * step) + 'ms');
+      if (reduce) { el.classList.add('is-in'); return; }
+      endReveal(el);
+      io.observe(el);
+    });
+  }
+  tag('.title');
+  tag('.lead', { base: 100 });
+  tag('.item', { base: 80, step: 120 });
+  tag('.group', { base: 150, step: 120 });
+  tag('.post', { variant: 'zoom', step: 0 });
+  tag('.proj', { step: 0 });
+  tag('.proj__info > *', { base: 200, step: 100 });
+  tag('.shot', { variant: 'zoom', base: 350, step: 130 });
+  tag('.tags li', { variant: 'zoom', step: 55 });
+  tag('.stack li', { variant: 'zoom', step: 60 });
+  tag('.content > .hero__buttons', { base: 200 });
+  tag('.proj__more');
+
+  /* ---------- Parallax das imagens da Experiência ---------- */
+  const posts = [...document.querySelectorAll('.post')];
+  function parallax(vh) {
+    posts.forEach((po) => {
+      const r = po.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      const t = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);   // -1 (saindo por cima) … 1 (entrando por baixo)
+      po.style.setProperty('--py', (-t * 6).toFixed(2) + '%');
+    });
+  }
+
+  /* ---------- Projetos: pilha de cartões ---------- */
+  const cards = [...document.querySelectorAll('.proj')];
+  const stackMQ = matchMedia('(min-width: 901px) and (min-height: 700px)');
+  let tops = [], heights = [];
+  function measure() {
+    cards.forEach((c) => { c.style.removeProperty('scale'); c.style.removeProperty('filter'); });
+    tops = cards.map((c) => parseFloat(getComputedStyle(c).top) || 0);
+    heights = cards.map((c) => c.offsetHeight);
+    update();
+  }
+  function stack() {
+    if (!stackMQ.matches) return;
+    cards.forEach((card, k) => {
+      const next = cards[k + 1];
+      if (!next) return;
+      const start = tops[k] + heights[k];                       // o próximo encosta no fim deste
+      const end = tops[k + 1];                                  // o próximo fica totalmente empilhado
+      const nextTop = next.getBoundingClientRect().top;
+      const p = Math.min(1, Math.max(0, (start - nextTop) / Math.max(1, start - end)));
+      card.style.scale = (1 - p * 0.05).toFixed(4);
+      card.style.filter = `brightness(${(1 - p * 0.4).toFixed(3)})`;
+    });
+  }
+
+  /* ---------- Loop de rolagem ---------- */
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+    const vh = window.innerHeight;
+    const max = document.documentElement.scrollHeight - vh;
+
+    progress.style.setProperty('--p', (max > 0 ? Math.min(1, y / max) : 0).toFixed(4));
+    header.classList.toggle('is-scrolled', y > 20);
+
+    hero.style.setProperty('--hs', Math.min(1, y / (vh * 0.9)).toFixed(3));
+    hero.classList.toggle('is-active', y < vh * 0.6);
+
+    let idx = 0;
+    const mid = y + vh * 0.4;
+    pages.forEach((pg, i) => { if (pg.offsetTop <= mid) idx = i; });
+    if (max > 0 && y >= max - 4) idx = pages.length - 1;
+    setActive(idx);
+
+    if (!reduce) { parallax(vh); stack(); }
+  }
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { measure(); });
+  stackMQ.addEventListener && stackMQ.addEventListener('change', measure);
+  window.addEventListener('load', measure);
+
+  measure();
 })();
