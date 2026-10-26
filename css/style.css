@@ -163,9 +163,9 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Projetos: cartões que se empilham conforme você rola ---------- */
 .projects { display: flex; flex-direction: column; gap: 2.5rem; }
-.proj { position: relative; transform-origin: 50% 0; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); grid-template-rows: minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 3rem); height: min(31rem, calc(100dvh - var(--header-h) - 7rem)); min-height: 24rem; padding: clamp(1.4rem, 2.8vw, 2.6rem); border-radius: 1.4rem; border: 1px solid #2c2c32; background: linear-gradient(135deg, #1d1d22, #151517); box-shadow: 0 -24px 60px -30px rgba(0,0,0,.85), 0 40px 90px -40px rgba(0,0,0,.9); }
-.proj--solo { grid-template-columns: 1fr; height: auto; min-height: 0; }
-@media (min-width: 901px) and (min-height: 700px) {
+.proj { position: relative; transform-origin: 50% 0; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); grid-template-rows: minmax(0, auto); gap: clamp(1.2rem, 3vw, 3rem); min-height: min(28rem, calc(100dvh - var(--header-h) - 7rem)); max-height: calc(100dvh - var(--header-h) - 4.5rem); padding: clamp(1.4rem, 2.8vw, 2.6rem); border-radius: 1.4rem; border: 1px solid #2c2c32; background: linear-gradient(135deg, #1d1d22, #151517); box-shadow: 0 -24px 60px -30px rgba(0,0,0,.85), 0 40px 90px -40px rgba(0,0,0,.9); }
+.proj--solo { grid-template-columns: 1fr; min-height: 0; max-height: none; }
+@media (min-width: 1001px) and (min-height: 700px) {
   .proj { position: sticky; top: calc(var(--header-h) + .5rem + var(--i, 0) * 1.1rem); }
 }
 .proj__info { display: flex; flex-direction: column; align-items: flex-start; align-self: center; gap: .9rem; min-width: 0; max-height: 100%; overflow-y: auto; scrollbar-width: none; }
@@ -183,10 +183,10 @@ a { color: inherit; text-decoration: none; }
 .proj__more { align-self: flex-start; margin-top: 1rem; }
 
 /* área das fotos: uma grande e duas menores */
-.proj__shots { display: grid; grid-template-columns: 1.6fr 1fr; grid-template-rows: 1fr 1fr; gap: .6rem; align-self: stretch; min-height: 0; }
+.proj__shots { display: grid; grid-template-columns: 1.6fr 1fr; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); gap: .6rem; align-self: stretch; min-height: 14rem; }
 .shot { position: relative; overflow: hidden; border-radius: .9rem; border: 1px solid var(--line); background: #1a1a1d; min-height: 0; }
 .shot:first-child { grid-row: 1 / span 2; }
-.shot img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease-out); }
+.shot img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease-out); }
 .shot:hover img { transform: scale(1.06); }
 .shot.is-missing { border: 1px dashed #3a3a40; }
 .shot.is-missing img { display: none; }
@@ -199,16 +199,26 @@ a { color: inherit; text-decoration: none; }
 .dots button.active { background: #d0d0d0; transform: scale(1.35); }
 
 /* ---------- Responsivo ---------- */
+/* cartões de projeto em coluna única (tablet e celular) */
+@media (max-width: 1000px) {
+  .proj { grid-template-columns: 1fr; grid-template-rows: auto; min-height: 0; max-height: none; }
+  .proj__info { max-height: none; overflow: visible; }
+  .proj__shots { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1.5fr) minmax(0, 1fr); aspect-ratio: 4 / 3; min-height: 0; }
+  .shot:first-child { grid-column: 1 / span 2; grid-row: 1; }
+}
+@media (max-width: 520px) {
+  .proj { padding: 1.2rem; border-radius: 1.1rem; }
+  .proj .card__title { font-size: 1.7rem; }
+  .proj__links .btn-link { flex: 1 1 100%; justify-content: center; }
+}
 @media (max-width: 900px) {
-  :root { --header-h: 5rem; }
+  :root { --header-h: 4.5rem; }
+  .logo img { height: 2.1rem; }
+  .logo img.is-missing { width: 2.1rem; }
   .nav { display: none; }
   .dots { display: none; }
   #experiencia { grid-template-columns: 1fr; row-gap: 1.6rem; }
   .post { height: min(70vw, 28rem); min-height: 22rem; }
-  .proj { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; min-height: 0; }
-  .proj__info { max-height: none; overflow: visible; }
-  .proj__shots { grid-template-columns: 1fr 1fr; grid-template-rows: auto; aspect-ratio: 16 / 11; }
-  .shot:first-child { grid-column: 1 / span 2; grid-row: 1; }
   .hero { grid-template-columns: 1fr; align-content: start; gap: 1rem; height: auto; min-height: 100dvh; padding-bottom: 0; --d: min(78vw, 36vh); }
   .hero__photo { position: relative; top: auto; order: 3; margin-top: auto; margin-bottom: 3.6rem; }
   .hero__buttons { margin: 1rem 0 1.2rem; }

@@ -104,7 +104,7 @@
 
   /* ---------- Projetos: pilha de cartões ---------- */
   const cards = [...document.querySelectorAll('.proj')];
-  const stackMQ = matchMedia('(min-width: 901px) and (min-height: 700px)');
+  const stackMQ = matchMedia('(min-width: 1001px) and (min-height: 700px)');
   let tops = [], heights = [];
   function measure() {
     cards.forEach((c) => { c.style.removeProperty('scale'); c.style.removeProperty('filter'); });
